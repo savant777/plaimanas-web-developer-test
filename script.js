@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // toggle menu
     const burger = document.querySelector('.pmn-burger');
     const menuContainer = document.querySelector('.pmn-menu-container');
+    const menuLinks = document.querySelectorAll('.pmn-list:not(.pmn-has-dropdown) > a');
+    const dropdownLinks = document.querySelectorAll('.pmn-dropdown-list a');
 
     burger.addEventListener('click', () => {
         menuContainer.classList.toggle('active');
@@ -54,6 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const isExpanded = menuContainer.classList.contains('active');
         burger.setAttribute('aria-expanded', isExpanded);
     });
+    
+    const closeAllMenus = () => {
+        menuContainer.classList.remove('active');
+        burger.classList.remove('active');
+        burger.setAttribute('aria-expanded', 'false');
+        
+        const dropdownMenu = document.querySelector(".pmn-has-dropdown");
+        if (dropdownMenu) {
+            dropdownMenu.classList.remove("active");
+        }
+    };
+
+    menuLinks.forEach(link => link.addEventListener('click', closeAllMenus));
+    dropdownLinks.forEach(link => link.addEventListener('click', closeAllMenus));
 
     // sub menu overlay
     const dropdownMenu = document.querySelector('.pmn-has-dropdown');
