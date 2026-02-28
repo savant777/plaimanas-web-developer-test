@@ -339,6 +339,7 @@ main {
     row-gap: 20px;
 
     .pmn-img {
+        max-width: 100%;
         position: relative;
         margin: auto;
 
@@ -412,6 +413,7 @@ main {
         grid-template-columns: 1fr 1fr;
         gap: clamp(1.5rem, 4vw, 3.75rem);
         width: clamp(346px, 84vw, 978px);
+        max-width: 100%;
         margin: auto;
 
         .pmn-collection#collection01 {
