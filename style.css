@@ -7,12 +7,8 @@
     --i-size: 17px;
 }
 
-html,
-*,
-*::before,
-*::after { 
+html, *, *::before, *::after { 
     box-sizing: border-box;
-    position: relative;
 }
 
 body {
@@ -28,9 +24,16 @@ body {
     line-height: 1.65;
 
     color: var(--pmn-txt);
-    background-color: #aaa;
+    background-color: var(--pmn-bg);
 
     min-height: 100vh;
+}
+
+header {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    width: 100%;
 }
 
 .pmn-overlay {
@@ -44,15 +47,11 @@ body {
     opacity: 0;
     transition: 0.3s ease;
     pointer-events: none;
-
-    &.active { opacity: 1; }
 }
 
-.pmn-nav {
-    position: fixed;
-    z-index: 99;
-    top: 0;
+.pmn-overlay:has(~ header > .pmn-nav .pmn-menu-container > .pmn-menu-links > .pmn-has-dropdown:hover) { opacity: 1; }
 
+.pmn-nav {
     width: 100%;
     height: 45px;
     padding-inline: clamp(0.875rem, 2.5vw, 2.5rem);
@@ -231,6 +230,7 @@ body {
             cursor: pointer;
 
             opacity: 0;
+            visibility: hidden;
             transition: 0.3s ease;
 
             .pmn-dropdown-list {
@@ -254,6 +254,7 @@ body {
 
             .pmn-dropdown {
                 opacity: 1;
+                visibility: visible;
 
                 .pmn-dropdown-list:hover {
                     font-weight: 500;
@@ -291,6 +292,118 @@ body {
         padding: 0;
         border: 0;
         outline: 0;
+    }
+}
+
+main {
+    position: relative;
+    padding-top: 45px;
+    min-height: 5000px;
+}
+
+.pmn-logo {
+    position: fixed;
+    z-index: 90;
+    top: calc(45px + clamp(0.8125rem, 2vw, 2.125rem));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 97.5%;
+    isolation: isolate; 
+    mix-blend-mode: difference;
+    user-select: none;
+    pointer-events: none;
+    
+    > img {
+        width: 100%;
+        filter: brightness(0) invert(1);
+    }
+}
+
+.pmn-hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    > img, > video {
+        user-select: none;
+        pointer-events: none;
+        width: 100%;
+    }
+}
+
+.pmn-padding {
+    margin-block: 100px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    .pmn-img {
+        position: relative;
+        margin: auto;
+
+        .pmn-img-crop {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+
+            > img, > video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .pmn-img-txt {
+            --font-size: clamp(40px, 10vw, 80px);
+            position: sticky;
+            top: 45px;
+            height: calc(50% + calc(var(--font-size)/2));
+            width: max-content;
+            margin: auto;
+            align-content: end;
+
+            span {
+                display: block;
+                font-family: 'Hanken Grotesk', sans-serif;
+                font-weight: 900;
+                font-size: var(--font-size);
+                line-height: 1;
+                text-transform: uppercase;
+                color: var(--pmn-bg);
+            }
+        }
+    }
+
+    .pmn-img:has(> .pmn-img-crop > img) {
+        width: clamp(282px, 30vw, 566px);
+        aspect-ratio: 566 / 572;
+    }
+
+    .pmn-img:has(> .pmn-img-crop > video) {
+        width: clamp(346px, 84vw, 1200px);
+        aspect-ratio: 1200 / 759;
+    }
+
+    .pmn-description {
+        max-width: 715px;
+        margin: auto;
+        padding-inline: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        row-gap: 14px;
+        text-align: center;
+
+        h3 {
+            margin: 0;
+            font-weight: bold;
+            font-size: clamp(14px, 1vw, 16px);
+        }
+
+        p {
+            margin: 0;
+            font-size: clamp(12px, 1vw, 14px);
+        }
     }
 }
 
@@ -346,6 +459,7 @@ body {
             position: relative !important;
             top: 0 !important;
             opacity: 1 !important;
+            visibility: visible !important;
             max-height: 0;
             overflow: hidden;
             margin-inline: -10px;
@@ -370,6 +484,13 @@ body {
     }
 
     .pmn-auth { column-gap: 0; }
+
+    .pmn-hero {
+        > img, > video {
+            width: unset;
+            height: 100vh;
+        }
+    }
 }
 
 .i {

@@ -71,19 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
     menuLinks.forEach(link => link.addEventListener('click', closeAllMenus));
     dropdownLinks.forEach(link => link.addEventListener('click', closeAllMenus));
 
-    // sub menu overlay
-    const dropdownMenu = document.querySelector('.pmn-has-dropdown');
-    const overlay = document.querySelector('.pmn-overlay');
-
-    dropdownMenu.addEventListener('mouseenter', () => {
-        overlay.classList.add('active');
-    });
-
-    dropdownMenu.addEventListener('mouseleave', () => {
-        overlay.classList.remove('active');
-    });
-
     // toggle sub menu
+    const dropdownMenu = document.querySelector('.pmn-has-dropdown');
+    
     dropdownMenu.addEventListener("click", function(e) {
         if (window.innerWidth <= 768) {
             e.stopPropagation();
