@@ -87,6 +87,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // handle overlay
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            link.blur();
+
+            const parentLi = link.closest('.pmn-has-dropdown');
+            if (parentLi) {
+                parentLi.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    parentLi.style.pointerEvents = 'auto';
+                }, 100);
+            }
+        });
+    });
+
     // switch faq tabs
     const faqTabs = document.querySelectorAll('input[name="faq"]');
     const faqItems = document.querySelectorAll('.pmn-faq-group');
