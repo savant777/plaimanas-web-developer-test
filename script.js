@@ -86,4 +86,32 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownMenu.classList.remove("active");
         }
     });
+
+    const faqTabs = document.querySelectorAll('input[name="faq"]');
+    const faqItems = document.querySelectorAll('.pmn-faq-accordians details');
+
+    const filterFAQ = (selectedCategory) => {
+        faqItems.forEach(item => {
+            const itemCategory = item.getAttribute('category');
+            
+            if (itemCategory === selectedCategory) {
+                item.style.display = 'block';
+                item.style.animation = 'fadeIn 0.4s ease forwards';
+            } else {
+                item.style.display = 'none';
+                item.removeAttribute('open');
+            }
+        });
+    };
+    
+    faqTabs.forEach(tab => {
+        tab.addEventListener('change', (e) => {
+            filterFAQ(e.target.value);
+        });
+    });
+    
+    const initialChecked = document.querySelector('input[name="faq"]:checked');
+    if (initialChecked) {
+        filterFAQ(initialChecked.value);
+    }
 });
