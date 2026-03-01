@@ -7,13 +7,11 @@
     --i-size: 17px;
 }
 
-html, *, *::before, *::after { 
-    box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
 
 body {
     position: relative;
-    margin: 0;
     padding: 0;
 
     font-family: Arial, Helvetica, sans-serif;
@@ -521,6 +519,63 @@ main {
     }
 }
 
+.pmn-scroll-wrapper {
+    --content-gap: clamp(20px, 5vw, 95px);
+
+    display: flex;
+    align-items: center;
+    column-gap: var(--content-gap);
+
+    max-width: 100%;
+    margin-block: 100px;
+    height: 85px;
+    overflow: hidden;
+
+    user-select: none;
+    pointer-events: none;
+    
+    background: var(--pmn-txt);
+    color: var(--pmn-bg);
+    
+    .pmn-scroll {
+        flex-shrink: 0;
+        min-width: 100%;
+        display: flex;
+        column-gap: var(--content-gap);
+
+        animation: InfiniteScroll 10s linear infinite;
+
+        .pmn-scroll-txt {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: clamp(24px, 4vw, 60px);
+            line-height: 1;
+            text-transform: uppercase;
+
+            p { margin: 0; }
+        }
+
+        .pmn-arrow {
+            flex-shrink: 0;
+            width: 85px;
+            height: 85px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+@keyframes InfiniteScroll {
+    to { transform: translateX(calc(-100% - var(--content-gap))); }
+}
+
 @media (max-width: 768px) {
     .pmn-burger {
         display: block;
@@ -621,13 +676,4 @@ main {
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-}
-
-p {
-    margin-block: 0 1rem;
-    margin-inline: 0;
-}
-
-p:last-of-type {
-    margin-block: 0;
 }
