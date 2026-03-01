@@ -176,7 +176,7 @@
         <!-- infinite scroll : end -->
         <!-- works : start -->
         <section id="Works" class="pmn-padding">
-            <div class="pmn-work-flex">
+            <div class="pmn-work-container">
                 <div class="pmn-work">
                     <h3>Worldwide shipping</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare, nisl non rhoncus commodo, turpis elit ultricies justo, vitae molestie quam justo ut lacus. Proin vitae</p>
@@ -194,10 +194,13 @@
         <!-- works : end -->
         <!-- faq : start -->
         <section id="FAQ" class="pmn-padding">
+            <!-- faq topic & description : start -->
             <div class="pmn-faq-topic">
                 <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare, nisl non rhoncus commodo.</p>
             </div>
+            <!-- faq topic & description : end -->
+            <!-- faq question tabs : start -->
             <div class="pmn-faq-tabs">
                 <label class="pmn-tab">
                     <input type="radio" name="faq" value="Orders" id="category1">
@@ -216,7 +219,10 @@
                     <span>Sizing & Products</span>
                 </label>
             </div>
-            <div class="pmn-faq-accordians">
+            <!-- faq question tabs : end -->
+            <!-- faq question accordions : start -->
+            <div class="pmn-faq-accordions">
+                <!-- faq question group : start -->
                 <div class="pmn-faq-group" data-group="Orders">
                     <details>
                         <summary><h3>Order Question #1</h3></summary>
@@ -237,6 +243,8 @@
                         </div>
                     </details>
                 </div>
+                <!-- faq question group : end -->
+                <!-- faq question group : start -->
                 <div class="pmn-faq-group" data-group="Shipping">
                     <details>
                         <summary><h3>Do you offer international shipping?</h3></summary>
@@ -257,6 +265,8 @@
                         </div>
                     </details>
                 </div>
+                <!-- faq question group : end -->
+                <!-- faq question group : start -->
                 <div class="pmn-faq-group" data-group="Returns">
                     <details>
                         <summary><h3>What is your return policy?</h3></summary>
@@ -277,6 +287,8 @@
                         </div>
                     </details>
                 </div>
+                <!-- faq question group : end -->
+                <!-- faq question group : start -->
                 <div class="pmn-faq-group" data-group="Sizing">
                     <details>
                         <summary><h3>Sizing Question #1</h3></summary>
@@ -297,9 +309,72 @@
                         </div>
                     </details>
                 </div>
+                <!-- faq question group : end -->
             </div>
+            <!-- faq question accordions : start -->
         </section>
         <!-- faq : end -->
+        <section id="ContactUs" class="pmn-padding">
+            <div class="pmn-contact-container">
+                <div class="pmn-contact-description">
+                    <h2>Make an inquiry</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare, nisl non rhoncus commodo.</p>
+                </div>
+
+                <form action="#" id="contact-form">
+                    <div class="pmn-form-group" id="pmn-worktype">
+                        <label class="pmn-radio-label">
+                            <input type="radio" name="worktype" value="Onsite" checked>
+                            <span>Onsite</span>
+                        </label>
+                        <label class="pmn-radio-label">
+                            <input type="radio" name="worktype" value="Hybrid">
+                            <span>Hybrid</span>
+                        </label>
+                    </div>
+
+                    <div class="pmn-form-row">
+                        <div class="pmn-input-field">
+                            <input type="text" name="fullname" id="pmn-name" placeholder=" " required>
+                            <label for="pmn-name">Full name*</label>
+                        </div>
+                        <div class="pmn-input-field">
+                            <input type="email" name="email" id="pmn-email" placeholder=" " required>
+                            <label for="pmn-email">Email*</label>
+                        </div>
+                    </div>
+
+                    <div class="pmn-form-row">
+                        <div class="pmn-input-field">
+                            <input type="tel" name="phone" id="pmn-phone" placeholder=" " required>
+                            <label for="pmn-phone">Phone Number*</label>
+                        </div>
+                        <div class="pmn-input-field pmn-select-field">
+                            <div class="pmn-select">
+                                <button type="button" class="pmn-select-button">
+                                    <span class="pmn-selected-value">Select Subject*</span>
+                                </button>
+                                <ul class="pmn-select-dropdown hidden">
+                                    <li data-value="general_inquiry">General inquiry</li>
+                                    <li data-value="job_application">Job Application</li>
+                                    <li data-value="media_press">Media & Press</li>
+                                </ul>
+                                <input type="hidden" name="subject" id="pmn-subject-hidden">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pmn-form-check">
+                        <label class="pmn-checkbox-label">
+                            <input type="checkbox" name="tc" required>
+                            <span>I agree to all terms & conditions</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="pmn-btn-submit">Send</button>
+                </form>
+            </div>
+        </section>
     </main>
     <!-- main : end -->
     <script src="script.js"></script>

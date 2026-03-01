@@ -86,25 +86,13 @@ header {
     #menuLang { margin-inline: -10px; }
 }
 
-.pmn-select {
-    position: relative;
+#menuLang.pmn-select {
     z-index: 100;
-    display: inline-block;
     width: max-content;
     
     .pmn-select-button {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        column-gap: 6px;
-
-        width: 100%;
-        padding: 10px;
-        border: 0;
-        background-color: transparent;
-
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
+        height: unset;
+        color: var(--pmn-txt);
 
         &::after {
             content: "";
@@ -117,29 +105,11 @@ header {
 
         &[aria-expanded="true"], &:hover { opacity: 0.5; }
         &[aria-expanded="true"]::after { transform: rotate(180deg); }
+
+        .pmn-selected-value { color: var(--pmn-txt) !important; }
     }
 
-    .pmn-select-dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: var(--pmn-bg);
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        li {
-            cursor: pointer;
-            padding: 10px;
-
-            &.selected { display: none; }
-
-            &:hover, &:focus { background-color: hsl(from var(--pmn-bg) h s calc(l - 5)); }
-        }
-        
-        &.hidden { display: none; }
-    }
+    .pmn-select-dropdown li.selected { display: none; }
 }
 
 .pmn-burger {
@@ -347,8 +317,6 @@ main {
     }
 }
 
-section:last-of-type { margin-block-end: 0; }
-
 .pmn-padding {
     margin-block: 100px;
     display: flex;
@@ -540,7 +508,7 @@ section:last-of-type { margin-block-end: 0; }
         }
     }
 
-    .pmn-work-flex {
+    .pmn-work-container {
         max-width: 1092px;
         margin: 40px auto;
         padding-inline: 1.25rem;
@@ -623,7 +591,7 @@ section:last-of-type { margin-block-end: 0; }
         input[type="radio"] { display: none; }
     }
 
-    .pmn-faq-accordians {
+    .pmn-faq-accordions {
         details {
             border-bottom: 1px solid rgb(from var(--pmn-bg) r g b / 20%);
             padding-bottom: 1.5rem;
@@ -650,8 +618,8 @@ section:last-of-type { margin-block-end: 0; }
                     width: 16px;
                     height: 16px;
                     background-color: currentColor;
-                    mask: url(./media/chevron-down.svg) no-repeat center;
-                    -webkit-mask: url(./media/chevron-down.svg) no-repeat center;
+                    mask: url(./media/chevron-down.svg) no-repeat center/contain;
+                    -webkit-mask: url(./media/chevron-down.svg) no-repeat center/contain;
                     transform: translateY(-50%) rotate(0);
                     transition: 0.3s ease-in-out;
                 }
@@ -685,6 +653,36 @@ section:last-of-type { margin-block-end: 0; }
 }
 
 #FAQ .pmn-faq-accordians details[open]::details-content { height: auto; }
+
+#ContactUs.pmn-padding { padding-inline: 1.25rem; }
+
+.pmn-contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    justify-content: space-between;
+    max-width: 1092px;
+    margin: auto;
+
+    .pmn-contact-description {
+        max-width: 375px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        padding-right: 4rem;
+        transition: 0.3s ease-in-out;
+
+        h2 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        p { font-size: 14px; }
+    }
+}
 
 .pmn-scroll-wrapper {
     --content-gap: clamp(20px, 5vw, 95px);
@@ -843,6 +841,8 @@ section:last-of-type { margin-block-end: 0; }
         flex-direction: column;
         align-items: center;
     }
+
+    .pmn-contact-container .pmn-contact-description { padding-right: 0; }
 }
 
 .i {
@@ -859,6 +859,9 @@ button,
 input[type="button"], 
 input[type="submit"], 
 input[type="reset"],
+input[type="text"],
+input[type="email"],
+input[type="tel"],
 .pmn-select-button {
     -webkit-appearance: none;
     appearance: none;
@@ -867,4 +870,247 @@ input[type="reset"],
     border: none;
     font-family: inherit;
     padding: 0;
+    outline: 0 !important;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.25rem;
+    font-size: 14px;
+
+    .pmn-form-group {
+        display: flex;
+        gap: 1.25rem;
+    }
+
+    .pmn-form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+    }
+}
+
+label.pmn-radio-label {
+    cursor: pointer;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    input { display: none; }
+
+    &::before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        height: 18px;
+        width: 18px;
+        background-color: var(--pmn-bg);
+        border: 1px solid rgb(from var(--pmn-txt) r g b / 20%);
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        height: 12px;
+        width: 12px;
+        background-color: var(--pmn-txt);
+        border-radius: 50%;
+        transition: 0.3s ease-in-out;
+        opacity: 0;
+
+    }
+
+    &:hover::before,
+    &:has(input:checked)::before { border-color: rgb(from var(--pmn-txt) r g b / 40%); }
+
+    &:has(input:checked)::after { opacity: 1; }
+}
+
+label.pmn-checkbox-label {
+    cursor: pointer;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    input { display: none; }
+    span { transition: 0.3s ease-in-out; opacity: 0.5; }
+
+    &::before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        height: 17px;
+        width: 17px;
+        padding: 2px;
+        background-color: var(--pmn-bg);
+        background-image: linear-gradient(45deg, var(--pmn-txt) 50%, transparent 50%);
+        background-size: 200% 200%;
+        background-position: 100% 0;
+        background-clip: content-box;
+        border: 1px solid rgb(from var(--pmn-txt) r g b / 20%);
+        border-radius: 2px;
+        transition: 0.3s ease-in-out;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        height: 11px;
+        width: 11px;
+        background-color: var(--pmn-bg);
+        mask: url(./media/check.svg) no-repeat center/contain;
+        -webkit-mask: url(./media/check.svg) no-repeat center/contain;
+        transition: 0.3s ease-in-out;
+        opacity: 0;
+    }
+
+    &:hover::before,
+    &:has(input:checked)::before { border-color: rgb(from var(--pmn-txt) r g b / 40%); }
+    &:has(input:checked)::before { background-position: 0 100%; }
+
+    &:has(input:checked)::after, &:has(input:checked) span, &:hover span { opacity: 1; }
+}
+
+.pmn-input-field {
+    flex: 1;
+    position: relative;
+    display: flex;
+    height: 52px;
+    border-bottom: 1px solid rgb(from var(--pmn-txt) r g b / 20%);
+    transition: 0.3s ease-in-out;
+
+    &:not(.pmn-select-field):has(input:focus),
+    &:not(.pmn-select-field):has(input:not(:placeholder-shown)) { border-color: rgb(from var(--pmn-txt) r g b / 40%); }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        outline: none;
+        background: transparent;
+    }
+
+    label {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: rgb(from var(--pmn-txt) r g b / 30%);
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    input:focus ~ label,
+    input:not(:placeholder-shown) ~ label {
+        top: 0;
+        left: 0;
+        transform: translateY(0);
+        font-size: 10px;
+    }
+}
+
+.pmn-select{
+    display: inline-block;
+    position: relative;
+    width: 100%;
+
+    .pmn-select-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: 6px;
+
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        .pmn-selected-value {
+            color: rgb(from var(--pmn-txt) r g b / 30%);
+            transition: 0.3s ease-in-out;
+        }
+    }
+    
+    &.is-selected .pmn-select-button .pmn-selected-value { color: var(--pmn-txt) !important; }
+
+    .pmn-select-dropdown {
+        position: absolute;
+        z-index: 10;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--pmn-bg);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pmn-select-dropdown li {
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .pmn-select-dropdown li:hover,
+    .pmn-select-dropdown li:focus { 
+        background-color: hsl(from var(--pmn-bg) h s calc(l - 5));
+    }
+
+    .pmn-select-dropdown.hidden { display: none;}
+}
+
+.pmn-select-field:has(.pmn-select.is-selected) { border-color: rgb(from var(--pmn-txt) r g b / 40%); }
+
+.pmn-select-field .pmn-select {
+    .pmn-select-button::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 11px;
+        height: 11px;
+        background-color: rgb(from var(--pmn-txt) r g b / 20%);
+        mask: url(./media/chevron-down.svg) no-repeat center/contain;
+        -webkit-mask: url(./media/chevron-down.svg) no-repeat center/contain;
+        transform: translateY(-50%) rotate(0);
+        transition: 0.3s ease-in-out;
+    }
+
+    .pmn-select-button[aria-expanded="true"]::after {
+        background-color: rgb(from var(--pmn-txt) r g b / 40%);
+        transform: translateY(-50%) rotate(-180deg);
+    }
+
+    .pmn-select-dropdown { --pmn-bg: #f8f9f8; }
+}
+
+.pmn-btn-submit {
+    margin-top: 1.25rem;
+    width: 140px;
+    height: 52px;
+    padding: 10px 30px;
+    background: var(--pmn-txt);
+    color: var(--pmn-bg);
+    font-size: 1rem;
+    text-align: center;
+    align-content: center;
 }

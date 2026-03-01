@@ -1,16 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
     // custom select handle
     const customSelects = document.querySelectorAll(".pmn-select");
+
     customSelects.forEach((customSelect) => {
         const selectButton = customSelect.querySelector(".pmn-select-button");
         const dropdown = customSelect.querySelector(".pmn-select-dropdown");
         const options = dropdown.querySelectorAll("li");
         const selectedValue = selectButton.querySelector(".pmn-selected-value");
-        
+        const hiddenInput = customSelect.querySelector("input[type='hidden']");
+
         const handleOptionSelect = (option) => {
             options.forEach((opt) => opt.classList.remove("selected"));
             option.classList.add("selected");
-            selectedValue.textContent = option.textContent.trim();
+            
+            const text = option.textContent.trim();
+            const val = option.dataset.value || text;
+
+            selectedValue.textContent = text;
+            if (hiddenInput) hiddenInput.value = val;
+            
+            customSelect.classList.add("is-selected");
         };
 
         const toggleDropdown = (expand = null) => {
@@ -19,13 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
             selectButton.setAttribute("aria-expanded", isOpen);
         };
         
-        const defaultOption = dropdown.querySelector("li.selected") || options[0];
+        const hasSelected = dropdown.querySelector("li.selected");
         
-        if (defaultOption) {
-            handleOptionSelect(defaultOption);
+        if (customSelect.id === "menuLang" || hasSelected) {
+            handleOptionSelect(hasSelected || options[0]);
         }
         
-        selectButton.addEventListener("click", () => {
+        else {
+            customSelect.classList.remove("is-selected");
+        }
+
+        selectButton.addEventListener("click", (e) => {
+            e.preventDefault();
             toggleDropdown();
         });
 
@@ -35,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggleDropdown(false);
             });
         });
-        
+
         document.addEventListener("click", (e) => {
             if (!customSelect.contains(e.target)) {
                 toggleDropdown(false);
