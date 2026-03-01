@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+@keyframes LogoShrink {
+    from { width: 97.5%; }
+    to { width: 21.5%; }
+}
+
+@keyframes InfiniteScroll {
+    to { transform: translateX(calc(-100% - var(--content-gap))); }
+}
+
 :root {
     --pmn-bg: #fff;
     --pmn-txt: #000;
@@ -19,7 +28,6 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 100%;
-    line-height: 1.65;
 
     color: var(--pmn-txt);
     background-color: var(--pmn-bg);
@@ -310,10 +318,18 @@ main {
     mix-blend-mode: difference;
     user-select: none;
     pointer-events: none;
+    transition: 0.3s ease-in-out;
     
     > img {
         width: 100%;
         filter: brightness(0) invert(1);
+    }
+}
+
+@supports (animation-timeline: scroll()) {
+    .pmn-logo {
+        animation: LogoShrink ease-in-out forwards;
+        animation-timeline: scroll();
     }
 }
 
@@ -393,6 +409,7 @@ main {
         flex-direction: column;
         row-gap: 14px;
         text-align: center;
+        transition: 0.3s ease-in-out;
 
         h3 {
             margin: 0;
@@ -404,6 +421,8 @@ main {
             margin: 0;
             font-size: clamp(12px, 1vw, 14px);
         }
+
+        &:hover { opacity: 0.5; }
     }
 
     .pmn-grid {
@@ -543,7 +562,7 @@ main {
         display: flex;
         column-gap: var(--content-gap);
 
-        animation: InfiniteScroll 10s linear infinite;
+        animation: InfiniteScroll 15s linear infinite;
 
         .pmn-scroll-txt {
             flex-shrink: 0;
@@ -572,9 +591,7 @@ main {
     }
 }
 
-@keyframes InfiniteScroll {
-    to { transform: translateX(calc(-100% - var(--content-gap))); }
-}
+
 
 @media (max-width: 768px) {
     .pmn-burger {
@@ -653,6 +670,8 @@ main {
     }
 
     .pmn-auth { column-gap: 0; }
+    
+    .pmn-logo { animation: unset !important; }
 
     .pmn-hero {
         > img, > video {
