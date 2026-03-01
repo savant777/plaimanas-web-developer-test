@@ -42,63 +42,77 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    // toggle menu
+    
+    // menu handle
     const burger = document.querySelector('.pmn-burger');
     const menuContainer = document.querySelector('.pmn-menu-container');
-    const menuLinks = document.querySelectorAll('.pmn-list:not(.pmn-has-dropdown) > a');
-    const dropdownLinks = document.querySelectorAll('.pmn-dropdown-list a');
+    const dropdownMenu = document.querySelector('.pmn-has-dropdown');
+    const overlay = document.querySelector('.pmn-overlay');
+    const allLinks = document.querySelectorAll('.pmn-menu-links a');
 
-    burger.addEventListener('click', () => {
-        menuContainer.classList.toggle('active');
-        burger.classList.toggle('active');
-        
-        const isExpanded = menuContainer.classList.contains('active');
-        burger.setAttribute('aria-expanded', isExpanded);
-    });
-    
-    const closeAllMenus = () => {
+    // close all function
+    const closeAll = () => {
         menuContainer.classList.remove('active');
         burger.classList.remove('active');
         burger.setAttribute('aria-expanded', 'false');
-        
-        const dropdownMenu = document.querySelector(".pmn-has-dropdown");
-        if (dropdownMenu) {
-            dropdownMenu.classList.remove("active");
-        }
+        if (dropdownMenu) dropdownMenu.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
     };
 
-    menuLinks.forEach(link => link.addEventListener('click', closeAllMenus));
-    dropdownLinks.forEach(link => link.addEventListener('click', closeAllMenus));
+    // toggle burger menu
+    burger.addEventListener('click', () => {
+        menuContainer.classList.toggle('active');
+        burger.classList.toggle('active');
+        const isExpanded = menuContainer.classList.contains('active');
+        burger.setAttribute('aria-expanded', isExpanded);
+    });
 
     // toggle sub menu
-    const dropdownMenu = document.querySelector('.pmn-has-dropdown');
-    
-    dropdownMenu.addEventListener("click", function(e) {
-        if (window.innerWidth <= 768) {
-            e.stopPropagation();
-            this.classList.toggle("active");
-        }
-    });
-    
-    document.addEventListener("click", (e) => {
-        if (dropdownMenu.classList.contains("active")) {
-            dropdownMenu.classList.remove("active");
-        }
-    });
-
-    // handle overlay
-    dropdownLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            link.blur();
-
-            const parentLi = link.closest('.pmn-has-dropdown');
-            if (parentLi) {
-                parentLi.style.pointerEvents = 'none';
-                setTimeout(() => {
-                    parentLi.style.pointerEvents = 'auto';
-                }, 100);
+    if (dropdownMenu) {
+        // on desktop hover
+        dropdownMenu.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 768) {
+                dropdownMenu.classList.add('active');
+                overlay.classList.add('active');
             }
+        });
+
+        dropdownMenu.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 768) {
+                dropdownMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+
+        // on mobile click
+        const dropdownLink = dropdownMenu.querySelector(':scope > a');
+    
+        dropdownLink.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownMenu.classList.toggle('active');
+            }
+        });
+    }
+    
+    // close menu when click outer area
+    document.addEventListener('click', (e) => {
+        if (dropdownMenu && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+    });
+
+    // close menu when click links
+    allLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const isDropdownParent = link.parentElement.classList.contains('pmn-has-dropdown');
+
+            if (window.innerWidth <= 768 && isDropdownParent) { return; }
+
+            closeAll();
+            link.blur();
         });
     });
 

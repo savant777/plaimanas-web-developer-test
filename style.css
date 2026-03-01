@@ -61,7 +61,9 @@ header {
     pointer-events: none;
 }
 
-.pmn-overlay:has(~ header > .pmn-nav .pmn-menu-container > .pmn-menu-links > .pmn-has-dropdown:hover) { opacity: 1; }
+.pmn-overlay.active { opacity: 1; }
+.pmn-overlay.active ~ header .pmn-nav { background-color: var(--pmn-txt); }
+.pmn-overlay.active ~ header .pmn-nav .pmn-menu-container .pmn-menu-links .pmn-has-dropdown a { color: var(--pmn-bg) !important; }
 
 .pmn-nav {
     width: 100%;
@@ -252,7 +254,7 @@ header {
                 transition: 0.3s ease-in-out;
 
                 > a {
-                    color: var(--pmn-bg);
+                    color: inherit !important;
                     text-decoration: none;
                     transition: 0.3s ease-in-out;
                 }
@@ -260,25 +262,19 @@ header {
 
             .mobile-only { display: none; }
         }
+    }
 
-        &:hover {
-            > a { color: var(--pmn-bg); }
-
-            .pmn-dropdown {
-                opacity: 1;
-                visibility: visible;
-
-                .pmn-dropdown-list:hover {
-                    font-weight: 500;
-                    font-size: 14px;
-                }
+    .pmn-has-dropdown.active {
+        .pmn-dropdown {
+            opacity: 1;
+            visibility: visible;
+            
+            .pmn-dropdown-list:hover {
+                font-weight: 500;
+                font-size: 14px;
             }
         }
     }
-}
-
-.pmn-nav:has(.pmn-menu-container > .pmn-menu-links > .pmn-has-dropdown:hover){
-    background-color: var(--pmn-txt);
 }
 
 .pmn-auth {
@@ -813,18 +809,13 @@ section:last-of-type { margin-block-end: 0; }
             margin-inline: -10px;
 
             .pmn-dropdown-list { text-align: center; }
-            .pmn-dropdown-list > a { color: var(--pmn-txt) !important; }
         }
 
         &.active {
             font-size: 24px;
             font-weight: 700;
 
-            > a {
-                color: var(--pmn-txt) !important;
-                
-                &::after { transform: rotate(180deg); }
-            }
+            > a ::after { transform: rotate(180deg); }
 
             .pmn-dropdown { max-height: 300px; }
             .mobile-only { display: block !important; }
