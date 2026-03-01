@@ -641,6 +641,8 @@ section:last-of-type { margin-block-end: 0; }
                 cursor: pointer;
                 position: relative;
                 padding-inline-end: 1rem;
+                outline: none;
+                -webkit-tap-highlight-color: transparent;
 
                 &::marker, &::-webkit-details-marker { display: none; }
 
@@ -862,4 +864,18 @@ section:last-of-type { margin-block-end: 0; }
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
+}
+
+button, 
+input[type="button"], 
+input[type="submit"], 
+input[type="reset"],
+.pmn-select-button {
+    -webkit-appearance: none;
+    appearance: none;
+    color: inherit;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    padding: 0;
 }

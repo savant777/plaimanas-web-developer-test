@@ -87,12 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // switch faq tabs
     const faqTabs = document.querySelectorAll('input[name="faq"]');
-    const faqItems = document.querySelectorAll('.pmn-faq-accordians details');
+    const faqItems = document.querySelectorAll('.pmn-faq-group');
 
     const filterFAQ = (selectedCategory) => {
         faqItems.forEach(item => {
-            const itemCategory = item.getAttribute('category');
+            const itemCategory = item.getAttribute('data-group');
             
             if (itemCategory === selectedCategory) {
                 item.style.display = 'block';
