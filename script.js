@@ -180,13 +180,27 @@ document.addEventListener("DOMContentLoaded", () => {
             const options = customSelect.querySelectorAll('li');
             
             customSelect.classList.remove('is-selected');
-            const fieldParent = customSelect.closest('.pmn-select-field');
-            if (fieldParent) fieldParent.classList.remove('has-value');
             
             selectedValue.textContent = "";
             if (hiddenInput) hiddenInput.value = "";
             
             options.forEach(opt => opt.classList.remove('selected'));
+        });
+    }
+
+    // subscription form handle for test
+    const newsForm = document.getElementById('newsletter-form');
+
+    if (newsForm) {
+        newsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(newsForm);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log("Newsletter Subscribed:", data);
+            
+            newsForm.reset();
         });
     }
 });
