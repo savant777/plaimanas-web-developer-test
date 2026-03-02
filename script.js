@@ -158,4 +158,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (initialChecked) {
         filterFAQ(initialChecked.value);
     }
+
+    // form handle for test
+    const contactForm = document.getElementById('contact-form');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+            data.tc = formData.has('tc');
+            console.log("Form Submitted Data:", data);
+            
+            contactForm.reset();
+
+            // reset custom select
+            const customSelect = contactForm.querySelector('.pmn-select');
+            const selectedValue = customSelect.querySelector('.pmn-selected-value');
+            const hiddenInput = customSelect.querySelector('input[type="hidden"]');
+            const options = customSelect.querySelectorAll('li');
+            
+            customSelect.classList.remove('is-selected');
+            const fieldParent = customSelect.closest('.pmn-select-field');
+            if (fieldParent) fieldParent.classList.remove('has-value');
+            
+            selectedValue.textContent = "";
+            if (hiddenInput) hiddenInput.value = "";
+            
+            options.forEach(opt => opt.classList.remove('selected'));
+        });
+    }
 });

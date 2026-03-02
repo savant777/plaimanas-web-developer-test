@@ -535,6 +535,17 @@ main {
             }
         }
     }
+
+    .pmn-to-homepage {
+        position: absolute;
+        bottom: -100px;
+        left: 10px;
+        padding: 10px;
+        font-size: 12px;
+        color: var(--pmn-txt);
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 }
 
 #FAQ {
@@ -994,6 +1005,7 @@ label.pmn-checkbox-label {
     flex: 1;
     position: relative;
     display: flex;
+    min-width: 200px;
     height: 52px;
     border-bottom: 1px solid rgb(from var(--pmn-txt) r g b / 20%);
     transition: 0.3s ease-in-out;
@@ -1080,6 +1092,14 @@ label.pmn-checkbox-label {
 
 .pmn-select-field:has(.pmn-select.is-selected) { border-color: rgb(from var(--pmn-txt) r g b / 40%); }
 
+.pmn-select-field:has(.pmn-select.is-selected) label,
+.pmn-select-field:has(.pmn-select .pmn-select-button[aria-expanded="true"]) label {
+    top: 0;
+    left: 0;
+    transform: translateY(0);
+    font-size: 10px;
+}
+
 .pmn-select-field .pmn-select {
     .pmn-select-button::after {
         content: "";
@@ -1113,4 +1133,5 @@ label.pmn-checkbox-label {
     font-size: 1rem;
     text-align: center;
     align-content: center;
+    cursor: pointer;
 }

@@ -314,14 +314,18 @@
             <!-- faq question accordions : start -->
         </section>
         <!-- faq : end -->
+        <!-- contact : start -->
         <section id="ContactUs" class="pmn-padding">
             <div class="pmn-contact-container">
+                <!-- contact description : start -->
                 <div class="pmn-contact-description">
                     <h2>Make an inquiry</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare, nisl non rhoncus commodo.</p>
                 </div>
-
-                <form action="#" id="contact-form">
+                <!-- contact description : end -->
+                <!-- contact form : start -->
+                <form action="" id="contact-form">
+                    <!-- work type : start -->
                     <div class="pmn-form-group" id="pmn-worktype">
                         <label class="pmn-radio-label">
                             <input type="radio" name="worktype" value="Onsite" checked>
@@ -332,7 +336,8 @@
                             <span>Hybrid</span>
                         </label>
                     </div>
-
+                    <!-- work type : end -->
+                    <!-- name & email : start -->
                     <div class="pmn-form-row">
                         <div class="pmn-input-field">
                             <input type="text" name="fullname" id="pmn-name" placeholder=" " required>
@@ -343,16 +348,17 @@
                             <label for="pmn-email">Email*</label>
                         </div>
                     </div>
-
+                    <!-- name & email : end -->
+                    <!-- phone & subject : start -->
                     <div class="pmn-form-row">
                         <div class="pmn-input-field">
                             <input type="tel" name="phone" id="pmn-phone" placeholder=" " required>
                             <label for="pmn-phone">Phone Number*</label>
                         </div>
                         <div class="pmn-input-field pmn-select-field">
-                            <div class="pmn-select">
+                            <div class="pmn-select" id="pmn-subject">
                                 <button type="button" class="pmn-select-button">
-                                    <span class="pmn-selected-value">Select Subject*</span>
+                                    <span class="pmn-selected-value"></span>
                                 </button>
                                 <ul class="pmn-select-dropdown hidden">
                                     <li data-value="general_inquiry">General inquiry</li>
@@ -361,20 +367,27 @@
                                 </ul>
                                 <input type="hidden" name="subject" id="pmn-subject-hidden">
                             </div>
+                            <label for="pmn-subject">Select Subject*</label>
                         </div>
                     </div>
-                    
+                    <!-- phone & subject : end -->
+                    <!-- term & condition : start -->
                     <div class="pmn-form-check">
                         <label class="pmn-checkbox-label">
                             <input type="checkbox" name="tc" required>
                             <span>I agree to all terms & conditions</span>
                         </label>
                     </div>
-
+                    <!-- term & condition : end -->
+                    <!-- submit button : start -->
                     <button type="submit" class="pmn-btn-submit">Send</button>
+                    <!-- submit button : end -->
                 </form>
+                <!-- contact form : end -->
             </div>
+            <a href="#" class="pmn-to-homepage">Homepage</a>
         </section>
+        <!-- contact : end -->
     </main>
     <!-- main : end -->
     <script src="script.js"></script>
